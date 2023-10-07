@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import bodyParser from 'body-parser';
-import { Sequelize } from '@sequelize/core';
+import connectDB from './config/connectDB';
 import dotenv from 'dotenv';
 import viewEngine from './config/viewEngine';
 import initWebRouter from './route/webRoute';
@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 initWebRouter(app);
+connectDB();
 const port = process.env.PORT || 4444;
 
 app.listen(port, ()=>{
