@@ -1,0 +1,30 @@
+<div class="row">
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i=0; i< data.rows.length; i++) {%>
+      <tr>
+        <th scope="row"><%= i+1 %></th>
+        <td><%= data.rows[i].email %></td>
+        <td><%= data.rows[i].firstName %></td>
+        <td><%= data.rows[i].lastName %></td>
+        <td><%= data.rows[i].address %></td>
+        <td>
+          <a href="#"><i class="bi-eye"></i></a> |
+          <a href="#"><i class="bi-wrench"></i></a> |
+          <a href="#"><i class="bi-trash"></i></a>
+        </td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+</div>
