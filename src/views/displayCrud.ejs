@@ -20,7 +20,10 @@
         <td><%= data.rows[i].address %></td>
         <td>
           <a href="#"><i class="bi-eye"></i></a> |
-          <a href="#"><i class="bi-wrench"></i></a> |
+          <a href="/edit-crud?id=<%= data.rows[i].id %>"
+            ><i class="bi-wrench"></i
+          ></a>
+          |
           <a href="#"><i class="bi-trash"></i></a>
         </td>
       </tr>

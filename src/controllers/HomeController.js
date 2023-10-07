@@ -4,7 +4,7 @@ import CrudServices from "../services/CrudServices";
 let getHomePage = asyncHandler(async (req, res) => {
   try {
     let dataUser = await db.User.findAll();
-    return res.render("main", { data: JSON.stringify(dataUser),  title: "This is home page"  });
+    return res.render("main", { data: { title: "This is home page" } });
   } catch (e) {
     console.log(e);
   }
@@ -23,10 +23,27 @@ let displayGetCrud = asyncHandler(async (req, res) => {
   let dataUser = await CrudServices.getAllUsers()
   return res.render("main", {data: {title: "Display Crud", page: "displayCrud", rows: dataUser}})
 })
+let getEditCrud = asyncHandler(async (req,res) => {
+  let userId = req.query.id;
+  console.log(userId)
+  if(userId){
+    let userData = await CrudServices.getUserInfoById(userId)
+    return res.render("main", {data: {title: "Edit Crud", page: "editCrud", rows: userData}})
+  }else{
+    res.send("user not found")
+  }  
+});
+let putCrud = asyncHandler(async (req,res) => {
+  let data = req.body;
+  await CrudServices.updateUserData(data)
+  return res.redirect("/get-crud")
+});
 
 module.exports = {
   getHomePage,
   getCrud,
   postCrud,
   displayGetCrud,
+  getEditCrud,
+  putCrud,
 };
