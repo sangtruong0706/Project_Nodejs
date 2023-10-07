@@ -17,12 +17,14 @@ let getCrud = asyncHandler(async (req, res) => {
 let postCrud = asyncHandler(async (req, res) => {
   let message = await CrudServices.createNewUser(req.body)
   console.log(message);
-  return res.send("post crud");
+  return res.redirect("/get-crud")
 });
+
 let displayGetCrud = asyncHandler(async (req, res) => {
   let dataUser = await CrudServices.getAllUsers()
   return res.render("main", {data: {title: "Display Crud", page: "displayCrud", rows: dataUser}})
-})
+});
+
 let getEditCrud = asyncHandler(async (req,res) => {
   let userId = req.query.id;
   console.log(userId)
@@ -33,10 +35,22 @@ let getEditCrud = asyncHandler(async (req,res) => {
     res.send("user not found")
   }  
 });
+
 let putCrud = asyncHandler(async (req,res) => {
   let data = req.body;
   await CrudServices.updateUserData(data)
   return res.redirect("/get-crud")
+});
+
+let deleteCrud = asyncHandler(async (req,res) => {
+  let userId = req.query.id;
+  console.log(userId)
+  if(userId){
+    await CrudServices.deleteUser(userId)
+    return res.redirect("/get-crud")
+  }else{
+    res.send("user not found")
+  }
 });
 
 module.exports = {
@@ -46,4 +60,5 @@ module.exports = {
   displayGetCrud,
   getEditCrud,
   putCrud,
+  deleteCrud,
 };
