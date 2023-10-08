@@ -1,5 +1,6 @@
 import express from "express";
 import homeController from "../controllers/HomeController";
+import userController from "../controllers/UserController";
 const router = express.Router();
 const initWebRoute = (app) => {
   router.get("/", homeController.getHomePage);
@@ -9,6 +10,8 @@ const initWebRoute = (app) => {
   router.get("/edit-crud", homeController.getEditCrud);
   router.post("/put-crud", homeController.putCrud);
   router.get("/delete-crud", homeController.deleteCrud);
+
+  router.post("/api/login", userController.handleLogin);
 
   router.get("*", (req, res) => {
     return res.render("404");

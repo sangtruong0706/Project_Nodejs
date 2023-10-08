@@ -5,11 +5,15 @@ import dotenv from 'dotenv';
 import viewEngine from './config/viewEngine';
 import initWebRouter from './route/webRoute';
 import session from 'express-session';
+const path = require('path');
+const publicDirectory_ = path.join(__dirname, './public');
+
 // var bodyParser = require('body-parser')
 var bcrypt = require('bcryptjs');
 dotenv.config();
 const app = express();
 viewEngine(app);
+app.use(express.static(publicDirectory_));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
